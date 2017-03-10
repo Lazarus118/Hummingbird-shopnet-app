@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +34,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // TOOLBAR LOGIC
         // -----------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         // DRAWER LOGIC
         // ------------------------------------------------------------------
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -44,12 +45,10 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         // TAB SCROLL LOGIC
-        // ------------------------------------
+        // ------------------------------------------------------------------
         TabHost host = (TabHost) findViewById(R.id.tabHost);
         host.setup();
 
@@ -77,6 +76,22 @@ public class MainActivity extends AppCompatActivity
         spec.setIndicator("More");
         host.addTab(spec);
 
+        TabWidget tw = (TabWidget)host.findViewById(android.R.id.tabs);
+        View tabView = tw.getChildTabViewAt(0);
+        View tabView1 = tw.getChildTabViewAt(1);
+        View tabView2 = tw.getChildTabViewAt(2);
+        View tabView3 = tw.getChildTabViewAt(3);
+        TextView tv = (TextView)tabView.findViewById(android.R.id.title);
+        TextView tv1 = (TextView)tabView1.findViewById(android.R.id.title);
+        TextView tv2 = (TextView)tabView2.findViewById(android.R.id.title);
+        TextView tv3 = (TextView)tabView3.findViewById(android.R.id.title);
+        tv.setTextSize(10);
+        tv1.setTextSize(10);
+        tv2.setTextSize(10);
+        tv3.setTextSize(10);
+
+        // EXPANDABLE LIST VIEW
+        // ------------------------------------------------------------------
         expListView = (ExpandableListView) findViewById(R.id.lvExp); // get the listview
         prepareListData_1(); // preparing list data
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
