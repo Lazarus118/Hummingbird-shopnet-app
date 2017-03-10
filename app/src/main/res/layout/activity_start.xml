@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/side_nav_bar">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75">
+
+        <TextView
+            android:text="Welcome Hummingbird shopnet App"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:id="@+id/textView2"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/shop_net_logo"
+            android:id="@+id/imageView2"
+            android:gravity="center"
+            android:padding="50dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Enter a nickname"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:id="@+id/enter_officer_number"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+</LinearLayout>
