@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -109,9 +110,9 @@
             android:hint="$0.00"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="none"
             android:ems="10"
-            android:id="@+id/editText3"/>
+            android:id="@+id/value"/>
 
         <Button
             android:text="Submit"
@@ -120,7 +121,7 @@
             android:background="#e9a825"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"/>
+            android:id="@+id/calculator_submit"/>
     </LinearLayout>
 
 </LinearLayout>

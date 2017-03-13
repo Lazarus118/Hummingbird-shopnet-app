@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -124,6 +126,15 @@ public class MainActivity extends AppCompatActivity
         // dropdown2.setBackgroundColor(Color.parseColor("#e9a825"));
         dropdown2.setBackground(getResources().getDrawable(R.drawable.circular_background));
         dropdown2.setAdapter(spinner_item2);
+        // ********************************************************* //
+        Button submit = (Button) findViewById(R.id.calculator_submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText value = (EditText) findViewById(R.id.value);
+                value.setText("This is just a demo " + "\uD83D\uDE0F");
+            }
+        });
     }
 
     /**********************************************************************************
