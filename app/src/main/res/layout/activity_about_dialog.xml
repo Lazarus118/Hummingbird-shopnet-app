@@ -17,9 +17,38 @@
 
     <TextView
         android:padding="10dp"
-        android:text="The ePortal provides a single point of reference to review salary statements and vacation leave information for government employees. \nAs part of its eGovernment policy, the Government of the Commonwealth of Dominica has taken another major initiative in providing online services for its employees. Monthly payslips and vacation balances for government employees are now available online These payslips can be viewed, emailed or printed by the employees. This new facility will allow government employees to access their monthly payslips at a click of a button and will save them the hassle of pursuing Votes Clerks and personal visits to the Treasury Department."
+        android:gravity="center"
+        android:text="The fastest, most affordable way to ship internet purchases from the US to Dominica."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#666"
         android:id="@+id/about"/>
+
+    <TextView
+        android:padding="10dp"
+        android:text="Frequently Asked Questions (FAQs)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="#666"/>
+
+    <TextView
+        android:padding="10dp"
+        android:text="What is the maximum weight and dimension of a package?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="#666"/>
+
+    <TextView
+        android:padding="5dp"
+        android:text="Maximum weight per package is 70 pounds, and dimensions should be no more than 50 inches in length and 30 inches in width. \n(Buying a TV? Be mindful that maximum size cannot exceed 50'' or it will NOT fit on the plane!)."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#666"/>
+
 </LinearLayout>
