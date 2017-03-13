@@ -36,9 +36,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingBottom="10dp"
-                android:text="user: Monique"
+                android:text="user | Monique"
                 android:textColor="#FFF"
-                android:textSize="25sp"/>
+                android:textSize="20sp"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -107,6 +107,11 @@
                         android:layout_height="match_parent"
                         android:background="#fff"
                         android:orientation="vertical">
+
+                        <include
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            layout="@layout/pre_alerts"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -115,6 +120,11 @@
                         android:layout_height="match_parent"
                         android:background="#fff"
                         android:orientation="vertical">
+
+                        <include
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            layout="@layout/calculator"/>
                     </LinearLayout>
 
                     <LinearLayout

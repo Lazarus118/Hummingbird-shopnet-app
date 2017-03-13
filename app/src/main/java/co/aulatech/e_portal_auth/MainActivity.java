@@ -2,7 +2,9 @@ package co.aulatech.e_portal_auth;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,31 +56,27 @@ public class MainActivity extends AppCompatActivity
         // ------------------------------------------------------------------
         TabHost host = (TabHost) findViewById(R.id.tabHost);
         host.setup();
-
         // Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Packages");
         spec.setContent(R.id.tab1);
         spec.setIndicator("Packages");
         host.addTab(spec);
-
         // Tab 2
         spec = host.newTabSpec("Pre-alerts");
         spec.setContent(R.id.tab2);
         spec.setIndicator("Pre-alerts");
         host.addTab(spec);
-
         // Tab 3
         spec = host.newTabSpec("Calculator");
         spec.setContent(R.id.tab3);
-        spec.setIndicator("Calender");
+        spec.setIndicator("Calculator");
         host.addTab(spec);
-
         // Tab 4
         spec = host.newTabSpec("More");
         spec.setContent(R.id.tab4);
         spec.setIndicator("More");
         host.addTab(spec);
-
+        // TAB TITLE SIZE
         TabWidget tw = (TabWidget)host.findViewById(android.R.id.tabs);
         View tabView = tw.getChildTabViewAt(0);
         View tabView1 = tw.getChildTabViewAt(1);
@@ -89,14 +90,40 @@ public class MainActivity extends AppCompatActivity
         tv1.setTextSize(10);
         tv2.setTextSize(10);
         tv3.setTextSize(10);
-
         // EXPANDABLE LIST VIEW
         // ------------------------------------------------------------------
         expListView = (ExpandableListView) findViewById(R.id.lvExp); // get the listview
         prepareListData_1(); // preparing list data
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(listAdapter); // setting list adapter
-
+        // PRE_ALERTS
+        // ------------------------------------------------------------------
+        ListView listView = (ListView) findViewById(R.id.pre_alerts_list);
+        // Array of strings...
+        String[] values = new String[]
+                { "Your 'Cell phone' is now ready",
+                "Your 'Man's shirt' is now ready",
+                "Your 'Leggings' is now ready"
+                };
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values);
+        listView.setAdapter(adapter);
+        // CALCULATOR
+        // ------------------------------------------------------------------
+        Spinner dropdown = (Spinner) findViewById(R.id.spinner);
+        String[] items = new String[]
+                {"Select item...", "Acoustic Guitar - (29.95%)", "Baby Pampers - (15.00%)"};
+        ArrayAdapter<String> spinner_item = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        // dropdown.setBackgroundColor(Color.parseColor("#e9a825"));
+        dropdown.setBackground(getResources().getDrawable(R.drawable.circular_background));
+        dropdown.setAdapter(spinner_item);
+        // ********************************************************* //
+        Spinner dropdown2 = (Spinner) findViewById(R.id.spinner2);
+        String[] items2 = new String[]
+                {"Select item...", "Employee Account"};
+        ArrayAdapter<String> spinner_item2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        // dropdown2.setBackgroundColor(Color.parseColor("#e9a825"));
+        dropdown2.setBackground(getResources().getDrawable(R.drawable.circular_background));
+        dropdown2.setAdapter(spinner_item2);
     }
 
     /**********************************************************************************
@@ -190,18 +217,16 @@ public class MainActivity extends AppCompatActivity
         startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
     public void whatsapp_click(View view) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "inQuery from Customer: Monique");
-        sendIntent.setType("text/plain");
-        sendIntent.setPackage("com.whatsapp");
-        startActivity(sendIntent);
+        int number = 2752371;
+        Uri uri = Uri.parse("smsto:" + number);
+        Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+        i.setPackage("com.whatsapp");
+        startActivity(i);
     }
     public void call_click(View view) {
-        String PhoneNum = "7672752371";
+        String PhoneNum = "7674492102";
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         callIntent.setData(Uri.parse("tel:"+Uri.encode(PhoneNum.trim())));
-        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(callIntent);
     }
 

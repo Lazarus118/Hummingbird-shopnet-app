@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="1">
+
+    <TextView
+        android:drawableLeft="@drawable/ic_calculator"
+        android:drawableStart="@drawable/ic_calculator"
+        android:drawablePadding="10dp"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:background="#666"
+        android:textColor="#FFF"
+        android:text="Calculate Customs Value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"/>
+
+    <TextView
+        android:text="Product:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"/>
+
+    <TextView
+        android:text="Account Type:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"/>
+
+    <TextView
+        android:text="Total Weight:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:background="@drawable/circular_background"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:hint="0 Kgs"
+                android:textColorHint="#000"
+                android:id="@+id/editText"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:background="@drawable/circular_background"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:hint="0 Lbs"
+                android:textColorHint="#000"
+                android:id="@+id/editText2"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="119dp">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#DDD"/>
+
+        <TextView
+            android:text="Value:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"/>
+
+        <EditText
+            android:background="@drawable/circular_background"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:textColorHint="#000"
+            android:hint="$0.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText3"/>
+
+        <Button
+            android:text="Submit"
+            android:layout_margin="5dp"
+            android:textColor="#fff"
+            android:background="#e9a825"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"/>
+    </LinearLayout>
+
+</LinearLayout>
