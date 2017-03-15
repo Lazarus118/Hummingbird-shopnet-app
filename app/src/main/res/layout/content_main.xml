@@ -133,6 +133,11 @@
                         android:layout_height="match_parent"
                         android:background="#fff"
                         android:orientation="vertical">
+
+                        <include
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            layout="@layout/android_image_slider_activity"/>
                     </LinearLayout>
 
                 </FrameLayout>

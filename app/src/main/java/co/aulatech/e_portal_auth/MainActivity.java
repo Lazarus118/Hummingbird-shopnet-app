@@ -6,7 +6,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -15,10 +19,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -135,6 +141,11 @@ public class MainActivity extends AppCompatActivity
                 value.setText("This is just a demo " + "\uD83D\uDE0F");
             }
         });
+        // IMAGE SLIDER
+        // ------------------------------------------------------------------
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
+        AndroidImageAdapter adapterView = new AndroidImageAdapter(this);
+        mViewPager.setAdapter(adapterView);
     }
 
     /**********************************************************************************
@@ -356,4 +367,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
