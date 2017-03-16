@@ -1,7 +1,10 @@
 package co.aulatech.e_portal_auth;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -24,15 +27,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    private static final String PHOTOSERVICE_URL = "https://raw.githubusercontent.com/Lazarus118/Budgeat_Rand_Image_src/master/file.json";
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -143,9 +160,21 @@ public class MainActivity extends AppCompatActivity
         });
         // IMAGE SLIDER
         // ------------------------------------------------------------------
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
-        AndroidImageAdapter adapterView = new AndroidImageAdapter(this);
-        mViewPager.setAdapter(adapterView);
+        new LoadImage().execute(PHOTOSERVICE_URL);
+        ImageButton next = (ImageButton)findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LoadImage().execute(PHOTOSERVICE_URL);
+            }
+        });
+        ImageButton previous = (ImageButton)findViewById(R.id.previous);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LoadImage().execute(PHOTOSERVICE_URL);
+            }
+        });
     }
 
     /**********************************************************************************
@@ -366,6 +395,84 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**********************************************************************************
+     * IMAGE FETCH
+     *********************************************************************************/
+    private class LoadImage extends AsyncTask<String, String, Bitmap> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(getApplicationContext(), "Fetching", Toast.LENGTH_LONG).show();
+        }
+
+        protected Bitmap doInBackground(String... args) {
+            InputStream inputStream = null;
+            String result = "";
+
+            try {
+                URL url = new URL(args[0]);
+                HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+                if (httpCon.getResponseCode() != 200)
+                    throw new Exception("Failed to connect");
+
+                inputStream = httpCon.getInputStream();
+
+                // convert inputstream to string
+                if (inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Did not work!";
+
+                if (result != null)
+                    System.out.println(result);
+
+                // convert String to JSONObject
+                JSONObject json = new JSONObject(result);
+
+                // get the array of photos
+                JSONArray imageJSON = json.getJSONArray("Album");
+                int index = imageJSON.length() - 1;
+                Random rand = new Random();
+
+                // lets get a randomly pic a picture to load
+                int rindex = rand.nextInt((index) + 1);
+                System.out.println(rindex);
+
+                // return image;
+                return BitmapFactory.decodeStream(new URL(imageJSON.getJSONObject(rindex).getString("url")).openStream());
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(Bitmap image) {
+            if (image != null) {
+                ImageView id_index_gallery_item_image = (ImageView) findViewById(R.id.id_index_gallery_item_image);
+                id_index_gallery_item_image.setImageBitmap(image);
+
+            } else {
+                Toast.makeText(MainActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while ((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
+
     }
 
 }

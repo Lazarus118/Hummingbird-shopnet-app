@@ -137,7 +137,7 @@
                         <include
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            layout="@layout/android_image_slider_activity"/>
+                            layout="@layout/activity_gallery_item"/>
                     </LinearLayout>
 
                 </FrameLayout>
